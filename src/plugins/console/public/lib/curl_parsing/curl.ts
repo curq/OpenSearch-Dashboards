@@ -28,12 +28,12 @@
  * under the License.
  */
 
-function detectCURLinLine(line) {
+function detectCURLinLine(line: string): RegExpMatchArray | null {
   // returns true if text matches a curl request
   return line.match(/^\s*?curl\s+(-X[A-Z]+)?\s*['"]?.*?['"]?(\s*$|\s+?-d\s*?['"])/);
 }
 
-export function detectCURL(text) {
+export function detectCURL(text: string): boolean {
   // returns true if text matches a curl request
   if (!text) return false;
   for (const line of text.split('\n')) {
@@ -44,13 +44,13 @@ export function detectCURL(text) {
   return false;
 }
 
-export function parseCURL(text) {
+export function parseCURL(text: string): string {
   let state = 'NONE';
-  const out = [];
-  let body = [];
+  const out: string[] = [];
+  let body: string[] = [];
   let line = '';
   const lines = text.trim().split('\n');
-  let matches;
+  let matches: RegExpMatchArray | null;
 
   const EmptyLine = /^\s*$/;
   const Comment = /^\s*(?:#|\/{2,})(.*)\n?$/;
@@ -72,25 +72,25 @@ export function parseCURL(text) {
     lines.shift();
   }
 
-  function nextLine() {
+  function nextLine(): boolean {
     if (line.length > 0) {
       return true;
     }
     if (lines.length === 0) {
       return false;
     }
-    line = lines.shift().replace(/[\r\n]+/g, '\n') + '\n';
+    line = lines.shift()!.replace(/[\r\n]+/g, '\n') + '\n';
     return true;
   }
 
-  function unescapeLastBodyEl() {
-    const str = body.pop().replace(/\\([\\"'])/g, '$1');
+  function unescapeLastBodyEl(): void {
+    const str: string = body.pop()!.replace(/\\([\\"'])/g, '$1');
     body.push(str);
   }
 
   // Is the next char a single or double quote?
   // If so remove it
-  function detectQuote() {
+  function detectQuote(): void {
     if (line.substr(0, 1) === "'") {
       line = line.substr(1);
       state = 'SINGLE_QUOTE';
@@ -103,7 +103,7 @@ export function parseCURL(text) {
   }
 
   // Body is finished - append to output with final LF
-  function addBodyToOut() {
+  function addBodyToOut(): void {
     if (body.length > 0) {
       out.push(body.join(''));
       body = [];
@@ -115,11 +115,11 @@ export function parseCURL(text) {
   // If the pattern matches, then the state is about to change,
   // so add the capture to the body and detect the next state
   // Otherwise add the whole line
-  function consumeMatching(pattern) {
-    const matches = line.match(pattern);
-    if (matches) {
-      body.push(matches[1]);
-      line = line.substr(matches[0].length);
+  function consumeMatching(pattern: RegExp) {
+    const consumeMatches = line.match(pattern);
+    if (consumeMatches) {
+      body.push(consumeMatches[1]);
+      line = line.substr(consumeMatches[0].length);
       detectQuote();
     } else {
       body.push(line);
@@ -127,26 +127,26 @@ export function parseCURL(text) {
     }
   }
 
-  function parseCurlLine() {
+  function parseCurlLine(): void {
     let verb = 'GET';
     let request = '';
-    let matches;
-    if ((matches = line.match(CurlVerb))) {
-      verb = matches[1];
+    let parseMatches: RegExpMatchArray | null;
+    if ((parseMatches = line.match(CurlVerb))) {
+      verb = parseMatches[1];
     }
 
     // JS regexen don't support possessive quantifiers, so
     // we need two distinct patterns
     const pattern = HasProtocol.test(line) ? CurlRequestWithProto : CurlRequestWithoutProto;
 
-    if ((matches = line.match(pattern))) {
-      request = matches[1];
+    if ((parseMatches = line.match(pattern))) {
+      request = parseMatches[1];
     }
 
     out.push(verb + ' /' + request + '\n');
 
-    if ((matches = line.match(CurlData))) {
-      line = line.substr(matches[0].length);
+    if ((parseMatches = line.match(CurlData))) {
+      line = line.substr(parseMatches[0].length);
       detectQuote();
       if (EmptyLine.test(line)) {
         line = '';
