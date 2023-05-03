@@ -14,7 +14,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Eliminate dependency on `got` versions older than 11.8.5 ([#2801](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/2801))
 - [Multi DataSource] Add explicit no spellcheck on password fields ([#2818](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/2818))
 - [CVE-2022-25912] Bumps simple-git from 3.4.0 to 3.15.0 ([#3036](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3036))
-- [CVE-2022-35256] Bumps node version from 14.20.0 to 14.20.1 [#3166](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3166))
+- [CVE-2022-35256] Bumps node version from 14.20.0 to 14.20.1 ([#3166](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3166))
 - [CVE-2022-46175] Bumps json5 version from 1.0.1 and 2.2.1 to 1.0.2 and 2.2.3 ([#3201](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3201))
 - [CVE-2022-25860] Bumps simple-git from 3.15.1 to 3.16.0 ([#3345](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3345))
 - [Security] Bumps hapi/statehood to 7.0.4 ([#3411](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3411))
@@ -22,7 +22,9 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - [CVE-2023-25653] Bump node-jose to 2.2.0 ([#3445](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3445))
 - [CVE-2023-26486][cve-2023-26487] Bump vega from 5.22.1 to 5.23.0 ([#3533](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3533))
 - [CVE-2023-0842] Bump xml2js from 0.4.23 to 0.5.0 ([#3842](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3842))
-- [Multi DataSource] Add private IP blocking validation on server side([#3912](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3912))
+- [Multi DataSource] Add private IP blocking validation on server side ([#3912](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3912))
+- Bump `joi` to v14 to avoid the possibility of prototype poisoning in a nested dependency ([#3952](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3952))
+- [CVE-2023-2251] Bump yaml to 2.2.2 ([#3947](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3947))
 
 ### 📈 Features/Enhancements
 
@@ -182,6 +184,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Remove the unused `renovate.json5` file ([3489](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3489))
 - Allow selecting the Node.js binary using `NODE_HOME` and `OSD_NODE_HOME` ([3508](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3508))
 - Bump `styled-components` from 5.3.5 to 5.3.9 ([#3678](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3678))
+- Bump `js-yaml` from 3.14.0 to 4.1.0 ([#3770](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3770))
 - Bump `oui` from `1.0.0` to `1.1.1` ([#3884](https://github.com/opensearch-project/OpenSearch-Dashboards/pull/3884))
 
 ### 🪛 Refactoring
